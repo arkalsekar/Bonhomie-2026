@@ -25,7 +25,7 @@ export default function Navbar() {
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         <Link to="/" className="flex-shrink-0 flex items-center">
-                            <span className="text-2xl font-bold text-primary">Bonhomei</span>
+                            <span className="text-2xl font-bold text-primary">Bonhomie</span>
                         </Link>
                         <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                             {navLinks.map((link) => (
