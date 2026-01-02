@@ -48,6 +48,7 @@ export default function Register() {
                 full_name,
                 ...profileData
             })
+            console.log(data)
             if (error) throw error
             // Supabase might require email confirmation.
             // For now, assume auto-login or redirect to login.
@@ -71,48 +72,56 @@ export default function Register() {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[600px]">
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+                        {/* Full Name */}
                         <div className="sm:col-span-2">
                             <label className="block text-sm font-medium leading-6 text-gray-900">Full Name</label>
                             <input type="text" {...register('full_name')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
                             {errors.full_name && <p className="mt-1 text-sm text-red-600">{errors.full_name.message}</p>}
                         </div>
 
+                        {/* Email */}
                         <div className="sm:col-span-2">
                             <label className="block text-sm font-medium leading-6 text-gray-900">Email</label>
                             <input type="email" {...register('email')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
                             {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
                         </div>
 
+                        {/* Password */}
                         <div>
                             <label className="block text-sm font-medium leading-6 text-gray-900">Password</label>
                             <input type="password" {...register('password')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
                             {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
                         </div>
 
+                        {/* Confirm Password */}
                         <div>
                             <label className="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
                             <input type="password" {...register('confirmPassword')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
                             {errors.confirmPassword && <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>}
                         </div>
 
+                        {/* Roll Number */}
                         <div>
                             <label className="block text-sm font-medium leading-6 text-gray-900">Roll Number</label>
                             <input type="text" {...register('roll_number')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
                             {errors.roll_number && <p className="mt-1 text-sm text-red-600">{errors.roll_number.message}</p>}
                         </div>
 
+                        {/* Phone */}
                         <div>
                             <label className="block text-sm font-medium leading-6 text-gray-900">Phone</label>
                             <input type="tel" {...register('phone')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
                             {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
                         </div>
 
+                        {/* School */}
                         <div>
                             <label className="block text-sm font-medium leading-6 text-gray-900">School</label>
                             <input type="text" {...register('school')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
                             {errors.school && <p className="mt-1 text-sm text-red-600">{errors.school.message}</p>}
                         </div>
 
+                        {/* Department */}
                         <div>
                             <label className="block text-sm font-medium leading-6 text-gray-900">Department</label>
                             <input type="text" {...register('department')} className="mt-2 block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" />
