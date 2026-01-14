@@ -11,6 +11,8 @@ import StudentDashboard from './pages/dashboards/StudentDashboard'
 import FacultyDashboard from './pages/dashboards/FacultyDashboard'
 import AdminDashboard from './pages/dashboards/AdminDashboard'
 import AdminStats from './pages/dashboards/AdminStats'
+import ManageCoordinators from './pages/dashboards/ManageCoordinators'
+import StudentEventDashboard from './pages/dashboards/StudentEventDashboard'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
@@ -27,9 +29,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
+          <Route path="/student/event-dashboard" element={<StudentEventDashboard />} />
           <Route path="/faculty/dashboard" element={<FacultyDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/stats" element={<AdminStats />} />
+          <Route path="/admin/coordinators" element={<ManageCoordinators />} />
         </Routes>
       </Layout>
     </AuthProvider>

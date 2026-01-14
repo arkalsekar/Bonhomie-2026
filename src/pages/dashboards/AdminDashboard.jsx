@@ -260,6 +260,8 @@ export default function AdminDashboard() {
                     <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
                     <p className="mt-2 text-gray-600">Manage registrations and payments.</p>
                     Click here to view <strong> <a href="/admin/stats">Advance Stats</a> </strong>
+                    <span className="mx-2">|</span>
+                    <strong><a href="/admin/coordinators" className="text-primary hover:text-blue-800">Manage Coordinators</a></strong>
                 </div>
                 <button
                     onClick={exportToCSV}

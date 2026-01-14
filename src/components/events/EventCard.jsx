@@ -5,13 +5,14 @@ import { format } from 'date-fns'
 export default function EventCard({ event }) {
     return (
         <div className="flex flex-col overflow-hidden rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-            <div className="flex-shrink-0">
+            {/* <div className="flex-shrink-0">
                 <img
                     className="h-48 w-full object-cover"
-                    src={event.image_path || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'}
+                    // src={event.image_path || ''}
                     alt={event.name}
                 />
-            </div>
+            </div> */}
+
             <div className="flex flex-1 flex-col justify-between p-6">
                 <div className="flex-1">
                     <div className="flex items-center justify-between">
