@@ -3,6 +3,7 @@ import Layout from './components/layout/Layout'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
 import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 import EventRegistration from './pages/EventRegistration'
@@ -10,6 +11,8 @@ import StudentDashboard from './pages/dashboards/StudentDashboard'
 import FacultyDashboard from './pages/dashboards/FacultyDashboard'
 import AdminDashboard from './pages/dashboards/AdminDashboard'
 import AdminStats from './pages/dashboards/AdminStats'
+import ManageCoordinators from './pages/dashboards/ManageCoordinators'
+import StudentEventDashboard from './pages/dashboards/StudentEventDashboard'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
@@ -24,10 +27,13 @@ function App() {
           <Route path="/events/:id/register" element={<EventRegistration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
+          <Route path="/student/event-dashboard" element={<StudentEventDashboard />} />
           <Route path="/faculty/dashboard" element={<FacultyDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/stats" element={<AdminStats />} />
+          <Route path="/admin/coordinators" element={<ManageCoordinators />} />
         </Routes>
       </Layout>
     </AuthProvider>

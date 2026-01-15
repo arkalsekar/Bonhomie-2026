@@ -1,13 +1,43 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { Menu, X, User, LogOut } from 'lucide-react'
-import { useState } from 'react'
 import clsx from 'clsx'
 
 export default function Navbar() {
     const { user, profile, signOut, isAdmin, isFaculty } = useAuth()
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
+    const [isCoordinator, setIsCoordinator] = useState(false)
+
+    // Check if user is a coordinator
+    useEffect(() => {
+        const checkCoordinatorStatus = async () => {
+            if (user && !isAdmin && !isFaculty) {
+                // If regular user, check if they manage any events
+                // Note: supabase client must be imported
+                const { supabase } = await import('../../lib/supabase')
+                const { data } = await supabase
+                    .from('events')
+                    .select('student_coordinators')
+                    .not('student_coordinators', 'is', null) // filter potentially if supported or just filter in JS
+
+                // Efficient client-side check if filtering by jsonb array existence is hard
+                // Or better: Use the rpc or a specialized query if possible. 
+                // Given the schema, we have to fetch events and check.
+                // Optimizing: Fetch only if we really need to know.
+
+                if (data) {
+                    const isCoord = data.some(e =>
+                        Array.isArray(e.student_coordinators) &&
+                        e.student_coordinators.some(c => c.profile_id === user.id)
+                    )
+                    setIsCoordinator(isCoord)
+                }
+            }
+        }
+        checkCoordinatorStatus()
+    }, [user, isAdmin, isFaculty])
 
     const handleSignOut = async () => {
         await signOut()
@@ -17,6 +47,7 @@ export default function Navbar() {
     const navLinks = [
         { name: 'Events', path: '/events' },
         ...(user ? [{ name: 'Dashboard', path: isAdmin ? '/admin/dashboard' : isFaculty ? '/faculty/dashboard' : '/dashboard' }] : []),
+        ...(isCoordinator ? [{ name: 'Event Dashboard', path: '/student/event-dashboard' }] : []),
     ]
 
     return (
@@ -42,9 +73,15 @@ export default function Navbar() {
                     <div className="hidden sm:ml-6 sm:flex sm:items-center">
                         {user ? (
                             <div className="flex items-center space-x-4">
-                                <span className="text-sm text-gray-700">
-                                    {profile?.full_name || user.email}
-                                </span>
+                                <Link
+                                    to="/profile"
+                                    className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                                >
+                                    <span className="text-sm text-gray-700">
+                                        {profile?.full_name || user.email}
+                                    </span>
+
+                                </Link>
                                 <button
                                     onClick={handleSignOut}
                                     className="p-2 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none"

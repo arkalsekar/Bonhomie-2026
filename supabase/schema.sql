@@ -129,6 +129,20 @@ create policy "Faculty can update assigned events"
     )
   );
 
+create policy "Student Coordinators can update assigned events"
+  on public.events for update
+  using (
+    exists (select 1 from public.profiles where id = auth.uid() and role = 'user')
+    AND
+    (
+      -- Check if student ID is in the student_coordinators jsonb array
+      -- student_coordinators is array of objects like [{"profile_id": "uuid", "name": "..."}]
+      auth.uid()::text = ANY (
+        select jsonb_array_elements(student_coordinators)->>'profile_id'
+      )
+    )
+  );
+
 -- Registrations
 alter table public.registrations enable row level security;
 
@@ -139,6 +153,19 @@ create policy "Users can view own registrations"
 create policy "Admins and Faculty can view all registrations"
   on public.registrations for select
   using ( exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'faculty')) );
+
+create policy "Student Coordinators can view assigned event registrations"
+  on public.registrations for select
+  using (
+    exists (
+      select 1 from public.events e
+      where e.id = event_id
+      AND
+      auth.uid()::text = ANY (
+        select jsonb_array_elements(e.student_coordinators)->>'profile_id'
+      )
+    )
+  );
 
 create policy "Users can insert own registration"
   on public.registrations for insert

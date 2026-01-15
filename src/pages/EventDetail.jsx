@@ -112,7 +112,7 @@ export default function EventDetail() {
                                     <h3 className="font-semibold text-gray-900">Student Coordinators</h3>
                                     <ul className="mt-2 text-gray-600">
                                         {Array.isArray(event.student_coordinators) && event.student_coordinators.map((c, i) => (
-                                            <li key={i}>{c.name} ({c.phone || 'N/A'})</li>
+                                            < li key={i} > {c.name} ({c.profile_id || 'N/A'})</li>
                                         ))}
                                     </ul>
                                 </div>
@@ -204,8 +204,8 @@ export default function EventDetail() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
-        </div>
+        </div >
     )
 }
